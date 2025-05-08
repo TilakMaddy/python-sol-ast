@@ -16,10 +16,9 @@ def main():
     print("Done! AST written to output.json")
 
     f = open("output.json", "r")
-    contexts = json.loads(f.read())['content']
+    asts = json.loads(f.read())['content']
 
-    for ast in contexts:
-        # Each ast is 1 context
+    for ast in asts:
         print("Solidity Version", ast['version'])
         print("File path", ast['file_path'])
         print("AST JSON", ast['ast_json'])
