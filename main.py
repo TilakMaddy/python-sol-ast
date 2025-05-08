@@ -2,13 +2,18 @@ import subprocess
 import json
 
 def prepare_ast():
-    command = "cargo run -q --manifest-path ast-gen/Cargo.toml"
+    quiet_mode = False # Change this to True if you don't want to see cargo stuff
+    command = ""
+    if quiet_mode != True:
+        command = "cargo run --manifest-path ast-gen/Cargo.toml"
+    else:
+        command = "cargo run -q --manifest-path ast-gen/Cargo.toml"
     subprocess.run(command.split(" ")) 
 
 def main():
     print("Waiting for solidity-ast-rs to give the report!")
     prepare_ast()
-    print("Done!")
+    print("Done! AST written to output.json")
 
     f = open("output.json", "r")
     contexts = json.loads(f.read())['content']
